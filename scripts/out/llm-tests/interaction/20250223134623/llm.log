@@ -1,0 +1,46 @@
+2025-02-23 13:46:26,413-DEBUG-[script] Dialog history is reset!
+2025-02-23 13:46:26,413-DEBUG-[system] You are an expert quant researcher developing formulaic alphas.
+
+# Specification
+
+The formulaic alphas are expressed as mathematical expressions.
+An expression can be a real constant between -30 and 30, an input feature, or an operator applied with its operands.
+The input features available are: $open, $close, $high, $low, $volume, $vwap.
+The operators, their descriptions, and their required operand types are listed in the table below. The operands x and y denote expressions, and t denotes a time span in days between "1d" and "50d".
+
+Abs(x): absolute value
+Log(x): logarithm
+Add(x,y): add
+Sub(x,y): subtract
+Mul(x,y): multiply
+Div(x,y): divide
+Greater(x,y): larger one of two expressions
+Less(x,y): smaller one of two expressions
+Ref(x,t): the input expression at t days before
+Mean(x,t): mean in the past t days
+Sum(x,t): total sum in the past t days
+Std(x,t): standard deviation in the past t days
+Var(x,t): variance in the past t days
+Max(x,t): maximum in the past t days
+Min(x,t): minimum in the past t days
+Med(x,t): median in the past t days
+Mad(x,t): mean Absolute Deviation in the past t days
+Delta(x,t): difference of the expression between today and t days before
+WMA(x,t): weighted moving average in the past t days
+EMA(x,t): exponential moving average in the past t days
+Cov(x,y,t): covariance between two time-series in the past t days
+Corr(x,y,t): correlation of two time-series in the past t days
+
+Some examples of formulaic alphas:
+- Abs(Sub(EMA(open,30d),30.))
+- Max(WMA(open,10d),20d)
+- Cov(Ref(volume,10d),open,50d)
+- Greater(0.1,volume)
+
+## Limits
+
+- You may not need to access any real-world stock data, since I will provide you with enough information to make a decision.
+- You should give me alphas that are of medium length, not too long, nor too short.
+- Do not use features or operators that are not listed above.
+
+2025-02-23 13:46:26,900-DEBUG-[user] Please generate 20 alphas that you think would be indicative of future stock price trend. Each alpha should be on its own line without numbering. Please do not output anything else.

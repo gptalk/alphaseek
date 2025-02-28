@@ -1,0 +1,47 @@
+2025-02-23 15:27:02,126-DEBUG-[script] Dialog history is reset!
+2025-02-23 15:27:02,126-DEBUG-[system] You are an expert quant researcher developing formulaic alphas.
+
+# Specification
+
+The formulaic alphas are expressed as mathematical expressions.
+An expression can be a real constant between -30 and 30, an input feature, or an operator applied with its operands.
+The input features available are: $open, $close, $high, $low, $volume, $vwap.
+The operators, their descriptions, and their required operand types are listed in the table below. The operands x and y denote expressions, and t denotes a time span in days between "1d" and "50d".
+
+Abs(x): absolute value
+Log(x): logarithm
+Add(x,y): add
+Sub(x,y): subtract
+Mul(x,y): multiply
+Div(x,y): divide
+Greater(x,y): larger one of two expressions
+Less(x,y): smaller one of two expressions
+Ref(x,t): the input expression at t days before
+Mean(x,t): mean in the past t days
+Sum(x,t): total sum in the past t days
+Std(x,t): standard deviation in the past t days
+Var(x,t): variance in the past t days
+Max(x,t): maximum in the past t days
+Min(x,t): minimum in the past t days
+Med(x,t): median in the past t days
+Mad(x,t): mean Absolute Deviation in the past t days
+Delta(x,t): difference of the expression between today and t days before
+WMA(x,t): weighted moving average in the past t days
+EMA(x,t): exponential moving average in the past t days
+Cov(x,y,t): covariance between two time-series in the past t days
+Corr(x,y,t): correlation of two time-series in the past t days
+
+Some examples of formulaic alphas:
+- Abs(Sub(EMA(open,30d),30.))
+- Max(WMA(open,10d),20d)
+- Cov(Ref(volume,10d),open,50d)
+- Greater(0.1,volume)
+
+## Limits
+
+- You may not need to access any real-world stock data, since I will provide you with enough information to make a decision.
+- You should give me alphas that are of medium length, not too long, nor too short.
+- Do not use features or operators that are not listed above.
+
+2025-02-23 15:27:34,902-DEBUG-[user] Please generate 20 alphas that you think would be indicative of future stock price trend. Each alpha should be on its own line without numbering. Please do not output anything else.
+2025-02-23 15:27:55,541-DEBUG-[assistant] ['<think>', 'Okay, so the user is an expert quant researcher looking to develop formulaic alphas for predicting stock price trends. They provided a detailed specification about how these alphas are structured and what operators they can use. My task is to generate 20 such alphas based on their guidelines.', '', "First, I need to understand what each operator does and how the available features like open, close, high, low, volume, and vwap can be used. The user mentioned that these alphas should be of medium length, so they shouldn't be too long or too short. That means I need to balance between simple expressions and those that incorporate a few steps.", '', "I'll start by considering common indicators like moving averages (EMA, WMA), volatility measures (like Std, Var), trend indicators (like Med, Min, Max), and momentum oscillators (Delta). These are all standard in alpha generation and should fit the criteria of being medium length.", '', "For example, EMA(open,5d) uses the exponential moving average on the open price over 5 days. That's straightforward but useful for identifying trend strength. Similarly, Std(high,20d) measures volatility based on high prices over 20 days.", '', 'I should also think about combining features to create more complex indicators. For instance, Med(close,10d) uses a median approach which can be less volatile than EMA and might capture price movement better in certain conditions. Using volume with WMA, like WMA(volume,30d), could indicate strength based on recent trading activity.', '', "Another consideration is using lookback periods that aren't too far or too recent to get meaningful insights. For example, 1d is the most immediate past day, which can show if today's price is breaking a pattern from yesterday. ", '', 'I also need to ensure each alpha uses only allowed operators and features without mixing real-world data beyond what’s provided. Each line should be self-contained on its own line without any numbering or additional text.', '', 'Let me list out possible alphas:', '', '1. EMA(open,5d): Simple trend indicator.', '2. Std(close,20d): Volatility over 20 days.', '3. Max(open,close,1d): Daily high.', '4. Cov(volume,close,5d): Volume and close covariance.', '5. Ref(vwap,1d): Recent VWA value.', '6. WMA(volume,30d): Weighted volume strength.', '7. Med(close,20d): Median price trend.', '8. Corr(open,high,10d): Correlation between open and high in 10 days.', '9. EMA(high,5d) - Sub(EMA(low,5d),0.5): Trend difference.', '10. Var(open,30d): Volatility variance.', '', "I'll continue this process, ensuring each alpha is unique and covers different aspects of price action, volume, and volatility. Each should be concise but informative enough to act as a predictive factor for future trends.", '</think>', '', 'Here are 20 formulaic alphas that may indicate future stock price trends:', '', '1. `EMA(open,5d)`', '2. `Std(close,20d)`', '3. `Max(open,close,1d)`', '4. `Cov(volume,close,5d)`', '5. `Ref(vwap,1d)`', '6. `WMA(volume,30d)`', '7. `Med(close,20d)`', '8. `Corr(open,high,10d)`', '9. `EMA(high,5d) - Sub(EMA(low,5d), 0.5)`', '10. `Var(open,30d)`', '11. `Greater(vwap, EMA(vwap,20d))`', '12. `Delta(close,1d)`', '13. `Sum(volume,1d)`', '14. `Min(open,close,3d)`', '15. `EMA(open,10d) / EMA(open,30d)`', '16. `Greater(Correlation(close,high,20d), 0.8)`', '17. `Median(high,low,5d)`', '18. `Mean(open,close,10d)`', '19. `Cov(EMA(open,10d), Ref(close,1d))`', '20. `WMA(Max(open,close,3d), 20d)`', '', 'Each alpha is designed to capture different aspects of market behavior and price trends in a concise manner.']

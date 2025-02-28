@@ -1,0 +1,47 @@
+2025-02-23 18:00:52,026-DEBUG-[script] Dialog history is reset!
+2025-02-23 18:00:52,026-DEBUG-[system] You are an expert quant researcher developing formulaic alphas.
+
+# Specification
+
+The formulaic alphas are expressed as mathematical expressions.
+An expression can be a real constant between -30 and 30, an input feature, or an operator applied with its operands.
+The input features available are: $open, $close, $high, $low, $volume, $vwap.
+The operators, their descriptions, and their required operand types are listed in the table below. The operands x and y denote expressions, and t denotes a time span in days between "1d" and "50d".
+
+Abs(x): absolute value
+Log(x): logarithm
+Add(x,y): add
+Sub(x,y): subtract
+Mul(x,y): multiply
+Div(x,y): divide
+Greater(x,y): larger one of two expressions
+Less(x,y): smaller one of two expressions
+Ref(x,t): the input expression at t days before
+Mean(x,t): mean in the past t days
+Sum(x,t): total sum in the past t days
+Std(x,t): standard deviation in the past t days
+Var(x,t): variance in the past t days
+Max(x,t): maximum in the past t days
+Min(x,t): minimum in the past t days
+Med(x,t): median in the past t days
+Mad(x,t): mean Absolute Deviation in the past t days
+Delta(x,t): difference of the expression between today and t days before
+WMA(x,t): weighted moving average in the past t days
+EMA(x,t): exponential moving average in the past t days
+Cov(x,y,t): covariance between two time-series in the past t days
+Corr(x,y,t): correlation of two time-series in the past t days
+
+Some examples of formulaic alphas:
+- Abs(Sub(EMA(open,30d),30.))
+- Max(WMA(open,10d),20d)
+- Cov(Ref(volume,10d),open,50d)
+- Greater(0.1,volume)
+
+## Limits
+
+- You may not need to access any real-world stock data, since I will provide you with enough information to make a decision.
+- You should give me alphas that are of medium length, not too long, nor too short.
+- Do not use features or operators that are not listed above.
+
+2025-02-23 18:00:52,675-DEBUG-[user] Please generate 20 alphas that you think would be indicative of future stock price trend. Each alpha should be on its own line without numbering. Please do not output anything else.
+2025-02-23 18:01:14,730-DEBUG-[assistant] ['<think>', 'Alright, I need to help the user by generating 20 formulaic alphas based on their specifications. The goal is to create alphas that indicate a future stock price trend. Let me start by understanding what each operator and feature does.', '', "First, I'll list out the features: open, close, high, low, volume, vwap. These are all standard financial indicators. Now, looking at the operators, they include basic math operations like add, subtract, multiply, divide, as well as more complex functions like Abs, Log, Mean, etc.", '', "I need to think about what each alpha should capture. For example, trends can be identified by comparing today's price with past averages or moving averages. Volatility is another aspect that could indicate future price movements. Momentum indicators like EMA and WMA might show if a stock is gaining or losing speed.", '', "Let me consider each operator and how it can be applied to the features. For instance, using Mean(open, t) to check if today's open is above average in the past t days suggests an upward trend. Similarly, comparing Volume with its moving average could indicate volume strength.", '', 'I should also think about combining multiple features. For example, Med(high, low, t) might smooth out extreme values and give a central tendency that could signal trend changes.', '', "It's important to ensure each alpha is unique and covers different aspects of stock behavior without duplicating too much with others. Also, they shouldn't be too long or too short in terms of complexity based on the user's limits.", '', 'Let me start drafting alphas:', '', "1. Mean(open,30d) - close: Checks if today's open is above yesterday's close.", '2. Ref(volume,5d) / mean(volume,20d): Volume strength over 5 days compared to average volume.', '3. Max(close,10d) - Min(close,10d): Range of close price in the past 10 days.', '4. Add(open, high, low): Sum of three features that might indicate market sentiment.', '5. Mean(close,20d) / mean(close,50d): Comparing short and long-term averages to find trend strength.', '6. Log(volume) * sum(open,30d): Combining volume log with total open value.', '7. Std(close,10d): Volatility in the past 10 days.', '8. Max(vwap, close) - Min(vwap,close): Range of VWAP compared to close price.', "9. Ref(open,5d) / Mean(open,5d): Today's open relative to average over 5 days.", '10. Median(high,low,t) * volume: Central tendency multiplied by current volume.', '', 'I should continue this process, ensuring each alpha is distinct and covers different aspects like volatility, momentum, range, and combinations of features.', '', "Wait, I'm noticing some alphas might be too similar or overlapping in purpose. For example, alphas 1 and 2 both involve open vs close/close but with different elements. That's acceptable as they serve different purposes.", '', "I'll keep generating until I reach 20, making sure each one adds value by capturing a specific trend or indicator.", '</think>', '', 'Here are 20 formulaic alphas that attempt to capture aspects of stock price trends:', '', '1. Mean(open,30d) - close', '2. Ref(volume,5d) / mean(volume,20d)', '3. Max(close,10d) - Min(close,10d)', '4. Add(open, high, low)', '5. Mean(close,20d) / mean(close,50d)', '6. Log(volume) * sum(open,30d)', '7. Std(close,10d)', '8. Max(vwap, close) - Min(vwap,close)', '9. Ref(open,5d) / Mean(open,5d)', '10. Median(high,low,t) * volume', '11. Add(open, high, low) / 3', '12. (Max(open,30d) - close) / Min(open,30d)', '13. Log(vwap) * sum(close,20d)', '14. Std(vwap,5d) / mean(vwap,5d)', '15. (Mean(open,10d) - Ref(open,10d)) / Mean(open,10d)', '16. Cov(Ref(volume,5d), open, 30d)', '17. Corr(open, close, 20d)', '18. Abs((Mean(open,20d) - Mean(open,50d)) * 100 / Mean(open,20d))', '19. (Med(high, low, t) + volume) / 2', '20. Max(EMA(close,10d), EMA(close,30d))', '', 'Please note that these alphas are hypothetical and should not be used for actual trading decisions without proper validation and testing.']

@@ -1,0 +1,47 @@
+2025-02-23 14:40:15,228-DEBUG-[script] Dialog history is reset!
+2025-02-23 14:40:15,228-DEBUG-[system] You are an expert quant researcher developing formulaic alphas.
+
+# Specification
+
+The formulaic alphas are expressed as mathematical expressions.
+An expression can be a real constant between -30 and 30, an input feature, or an operator applied with its operands.
+The input features available are: $open, $close, $high, $low, $volume, $vwap.
+The operators, their descriptions, and their required operand types are listed in the table below. The operands x and y denote expressions, and t denotes a time span in days between "1d" and "50d".
+
+Abs(x): absolute value
+Log(x): logarithm
+Add(x,y): add
+Sub(x,y): subtract
+Mul(x,y): multiply
+Div(x,y): divide
+Greater(x,y): larger one of two expressions
+Less(x,y): smaller one of two expressions
+Ref(x,t): the input expression at t days before
+Mean(x,t): mean in the past t days
+Sum(x,t): total sum in the past t days
+Std(x,t): standard deviation in the past t days
+Var(x,t): variance in the past t days
+Max(x,t): maximum in the past t days
+Min(x,t): minimum in the past t days
+Med(x,t): median in the past t days
+Mad(x,t): mean Absolute Deviation in the past t days
+Delta(x,t): difference of the expression between today and t days before
+WMA(x,t): weighted moving average in the past t days
+EMA(x,t): exponential moving average in the past t days
+Cov(x,y,t): covariance between two time-series in the past t days
+Corr(x,y,t): correlation of two time-series in the past t days
+
+Some examples of formulaic alphas:
+- Abs(Sub(EMA(open,30d),30.))
+- Max(WMA(open,10d),20d)
+- Cov(Ref(volume,10d),open,50d)
+- Greater(0.1,volume)
+
+## Limits
+
+- You may not need to access any real-world stock data, since I will provide you with enough information to make a decision.
+- You should give me alphas that are of medium length, not too long, nor too short.
+- Do not use features or operators that are not listed above.
+
+2025-02-23 14:40:15,778-DEBUG-[user] Please generate 20 alphas that you think would be indicative of future stock price trend. Each alpha should be on its own line without numbering. Please do not output anything else.
+2025-02-23 14:40:44,805-DEBUG-[assistant] ['<think>', "Alright, so I've been given this task to develop some formulaic alphas for predicting stock price trends. Let me try to break down what needs to be done here.", '', "First off, the user is an expert quant researcher looking for alpha factors. These are mathematical expressions using specific operators and input features like open, close, high, low, volume, vwap. The goal is to generate 20 alphas that indicate future stock trends without using any real-world data beyond what's provided.", '', 'Looking at the specifications, each alpha should be a formulaic expression as per the given table. They can use constants between -30 and 30, input features, or operators with their operands defined as x and y. Time spans are denoted by t in days like "1d" to "50d".', '', "I need to make sure each alpha is unique, uses the allowed operations, and doesn't exceed the given structure. Also, they should be of medium length—not too long or too short. So I have to balance complexity with simplicity.", '', 'Starting with basic indicators: moving averages are common in technical analysis. EMA and WMA could be good starting points since they smooth out price data. For example, EMA(open,10d) gives the exponential moving average of open prices over 10 days.', '', "Then there's delta, which compares today's value to past values. Delta(open,1d) tells how much the opening price has changed in one day.", '', 'For volatility, standard deviation and variance are options. Std(open,5d) measures variability over five days.', '', 'Correlation can show how two features move together. Corr(volume,close,20d) would indicate if volume moves with closing prices over 20 days.', '', 'Combining these, I can create alphas that use multiple operations. For instance, using Max and Min to set thresholds or combining EMA with delta for trend strength.', '', 'I should also consider combinations like Cov between volume and open to see their joint behavior. Similarly, using Ref to look back in time, like Ref(volume,10d), and then applying operations on it.', '', "It's important not to repeat the same operators too much; mixing Add, Sub, Div will make each alpha unique. Also, ensuring that each uses different features or time spans can add diversity.", '', "I'll need to list 20 distinct alphas without duplication in structure or use of features. Each should be self-contained and follow the operator rules provided.", '', 'Let me think about possible combinations:', '', '1. EMA(open,5d): Simple moving average for trend.', '2. Delta(close,3d): Change over three days.', '3. Std(high,10d): Volatility of high prices.', '4. Cov(open,volume,20d): Correlation between open and volume.', '5. Max(EMA(open,30d), Sub(open,close)): Maximum of EMA or price difference.', '6. WMA(open,7d): Weighted moving average for trend.', '7. Min(open,close,14d): Minimum over 14-day period.', '8. Med(close,25d): Median price over 25 days.', '9. Corr(high,low,30d): Correlation between high and low.', '10. Var(vwap,15d): Variance of vwap over 15 days.', '', "Wait, that's 10 so far. Need to go up to 20.", '', 'Continuing:', '', '11. Ref(open,5d): Open price five days ago.', '12. Mean(close,30d): Average closing price.', '13. Sum(high,7d): Total high over seven days.', '14. Div(Low(open), volume): Ratio of low to volume.', '15. Greater(EMA(low,20d), Sub(vwap,open)): EMA low vs vwap-open difference.', '16. MAD(close,5d): Mean absolute deviation of close.', '17. Delta(EMA(close,14d),close): Change in 14-day EMA.', '18. Cov(open,vwap,30d): Another covariance check.', '19. Corr(open,high,25d): Correlation between open and high.', '20. Min(WMA(high,10d), Std(low,30d)): Minimum of WMA high and std low.', '', 'Hmm, that\'s 20. Each uses different operators and features, time spans vary from 1d to 50d, but within the limit of "50d" isn\'t used here—since I went up only to 30d in some cases. Also, each alpha is unique and follows the structure.', '', 'I should ensure that none of them are using invalid operations or missing features. For example, checking if all alphas use correct syntax like commas for Add, Sub, etc., where needed.', '', 'Also, making sure that operators with two operands have their parentheses correctly placed, e.g., EMA(open,10d) is an expression on its own, while others use functions with parameters in parentheses.', '', 'Finally, I need to present each alpha clearly without any markdown or numbering, just as formulas separated by line breaks.', '</think>', '', 'EMA(open,5d):  ', 'Delta(close,3d):  ', 'Std(high,10d):  ', 'Cov(open,volume,20d):  ', 'Max(EMA(open,30d), Sub(open,close)):  ', 'WMA(open,7d):  ', 'Min(open,close,14d):  ', 'Med(close,25d):  ', 'Corr(high,low,30d):  ', 'Var(vwap,15d):  ', 'Ref(open,5d):  ', 'Mean(close,30d):  ', 'Sum(high,7d):  ', 'Div(Low(open),volume):  ', 'Greater(EMA(low,20d), Sub(vwap,open)):  ', 'MAD(close,5d):  ', 'Delta(EMA(close,14d),close):  ', 'Cov(open,vwap,30d):  ', 'Corr(open,high,25d):  ', 'Min(WMA(high,10d), Std(low,30d)):']
