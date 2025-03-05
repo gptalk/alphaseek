@@ -10,7 +10,9 @@ class OllamaClient(ChatClient):
     def __init__(
             self,
             config: ChatConfig,
-            model: str = "deepseek-r1:latest",  # 设置本地模型为 deepseek-r1:latest
+            # 设置本地模型为 deepseek-r1:latest
+            # model: str = "deepseek-r1:latest",
+            model: str = "deepseek-r1:1.5b",
             trim_to_token_limit: bool = True,
             max_tokens: int = 16385  # 显式指定最大令牌数
     ) -> None:

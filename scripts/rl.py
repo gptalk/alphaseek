@@ -48,16 +48,6 @@ def build_parser() -> ExpressionParser:
     )
 
 
-def build_chat_client(log_dir: str) -> ChatClient:
-    logger = get_logger("llm", os.path.join(log_dir, "llm.log"))
-    return OpenAIClient(
-        client=OpenAI(base_url="https://api.ai.cs.ac.cn/v1"),
-        config=ChatConfig(
-            system_prompt=EXPLAIN_WITH_TEXT_DESC,
-            logger=logger
-        )
-    )
-
 
 class CustomCallback(BaseCallback):
     def __init__(

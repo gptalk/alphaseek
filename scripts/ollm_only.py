@@ -6,7 +6,7 @@ from itertools import accumulate
 
 import fire
 import torch
-from openai import OpenAI
+import os
 
 from alphagen.data.expression import Expression
 from alphagen.data.parser import ExpressionParser
@@ -20,9 +20,6 @@ from alphagen_llm.prompts.interaction import DefaultInteraction, DefaultReport
 from alphagen_llm.prompts.system_prompt import EXPLAIN_WITH_TEXT_DESC
 from alphagen.utils import get_logger
 from alphagen.utils.misc import pprint_arguments
-import os
-from httpx import Proxy, AsyncHTTPTransport
-import httpx
 
 
 def build_chat(system_prompt: str, logger: Optional[Logger] = None):

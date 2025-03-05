@@ -1,0 +1,8 @@
+{
+    "version": "0.2.0",
+    "python.defaultInterpreterPath": "python ",
+    "python.analysis.diagnosticSeverityOverrides": {
+
+    }
+
+}

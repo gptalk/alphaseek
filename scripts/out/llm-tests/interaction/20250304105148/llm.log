@@ -1,0 +1,67 @@
+2025-03-04 10:51:55,464-DEBUG-[script] Dialog history is reset!
+2025-03-04 10:51:55,465-DEBUG-[system] You are an expert quant researcher developing formulaic alphas.
+
+# Specification
+
+The formulaic alphas are expressed as mathematical expressions.
+An expression can be a real constant between -30 and 30, an input feature, or an operator applied with its operands.
+The input features available are: $open, $close, $high, $low, $volume, $vwap.
+The operators, their descriptions, and their required operand types are listed in the table below. The operands x and y denote expressions, and t denotes a time span in days between "1d" and "50d".
+
+Abs(x): absolute value
+Log(x): logarithm
+Add(x,y): add
+Sub(x,y): subtract
+Mul(x,y): multiply
+Div(x,y): divide
+Greater(x,y): larger one of two expressions
+Less(x,y): smaller one of two expressions
+Ref(x,t): the input expression at t days before
+Mean(x,t): mean in the past t days
+Sum(x,t): total sum in the past t days
+Std(x,t): standard deviation in the past t days
+Var(x,t): variance in the past t days
+Max(x,t): maximum in the past t days
+Min(x,t): minimum in the past t days
+Med(x,t): median in the past t days
+Mad(x,t): mean Absolute Deviation in the past t days
+Delta(x,t): difference of the expression between today and t days before
+WMA(x,t): weighted moving average in the past t days
+EMA(x,t): exponential moving average in the past t days
+Cov(x,y,t): covariance between two time-series in the past t days
+Corr(x,y,t): correlation of two time-series in the past t days
+
+Some examples of formulaic alphas:
+- Abs(Sub(EMA(open,30d),30.))
+- Max(WMA(open,10d),20d)
+- Cov(Ref(volume,10d),open,50d)
+- Greater(0.1,volume)
+
+## Limits
+
+- You may not need to access any real-world stock data, since I will provide you with enough information to make a decision.
+- You should give me alphas that are of medium length, not too long, nor too short.
+- Do not use features or operators that are not listed above.
+
+2025-03-04 10:51:56,186-DEBUG-[user] Please generate 20 alphas that you think would be indicative of future stock price trend. Each alpha should be on its own line without numbering. Please do not output anything else.
+2025-03-04 10:52:29,097-DEBUG-[assistant] Mul(Sub(EMA($close, 10d), EMA($open, 10d)), Div($volume, Mean($volume, 20d)))  
+Add(Delta($close, 5d), Mul(Std($close, 20d), Corr($close, $volume, 20d)))  
+Sub(WMA($high, 15d), WMA($low, 15d))  
+Div(Sum($close, 10d), Sum($open, 10d))  
+Mul(Log($volume), Delta($vwap, 3d))  
+Greater(Mean($close, 20d), Median($close, 20d))  
+Sub(EMA($close, 10d), Ref(EMA($close, 10d), 5d))  
+Mul(Corr($high, $low, 30d), Std($volume, 30d))  
+Div(Delta($vwap, 10d), Mad($close, 10d))  
+Add(Max($high, 10d), Min($low, 10d))  
+Mul(Sub($close, $open), Cov($close, $volume, 20d))  
+Div(Sum($volume, 5d), Mean($volume, 20d))  
+Sub(EMA($close, 20d), WMA($close, 20d))  
+Mul(Delta($close, 3d), Corr($close, $vwap, 15d))  
+Add(Ref($close, 5d), Delta($volume, 5d))  
+Div(Std($close, 10d), Var($close, 10d))  
+Mul(Log($volume), Sub($high, $low))  
+Add(Mean($close, 15d), Std($close, 15d))  
+Sub(WMA($close, 10d), Ref(WMA($close, 10d), 5d))  
+Mul(Corr($close, $volume, 20d), Delta($vwap, 10d))
+2025-03-04 10:52:29,098-DEBUG-[script] Invalid expressions: [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []]

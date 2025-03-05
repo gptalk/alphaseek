@@ -8,6 +8,13 @@ import fire
 import torch
 from openai import OpenAI
 
+import sys
+import os
+
+# 添加项目根目录到 Python 路径
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(project_root)
+
 from alphagen.data.expression import Expression
 from alphagen.data.parser import ExpressionParser
 from alphagen.data.expression import *
@@ -83,20 +90,10 @@ def _update_model_max_tokens():
     MODEL_MAX_TOKENS["deepseek-chat"] = 16385
 
 def build_chat(system_prompt: str, logger: Optional[Logger] = None):
-    # 配置 SOCKS5 代理
-    socks5_proxy = "socks5h://127.0.0.1:1080"
-
-    # 配置 httpx.HTTPTransport
-    transport = httpx.HTTPTransport(proxy=httpx.Proxy(socks5_proxy))
-
-    # 使用 httpx.Proxy 设置代理
-    client = httpx.Client(transport=transport)
     openai_client = OpenAI(
             base_url="https://api.deepseek.com/v1",
-            api_key=os.getenv("OPENAI_API_KEY"),
-            http_client=client,
+            api_key=os.getenv("DEEPSEEK_API_KEY")
         )
-    # openai_client.model = "gpt-3.5-turbo"
     openai_client.model = "deepseek-chat"
 
     return DeepSeekClient(
@@ -241,4 +238,5 @@ def run_experiment(
 
 
 if __name__ == "__main__":
+    print(sys.path) 
     fire.Fire(run_experiment)
